@@ -32,6 +32,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.monksoft.chestgame.databinding.ActivityMainBinding
+import com.stripe.android.PaymentConfiguration
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -86,6 +87,14 @@ class MainActivity : AppCompatActivity() {
         initAds()
         initScreenGame()
         startGame()
+    }
+
+    fun launchPaymentCard(view: View){
+        val keyStringPayment = "pk_test_51HUy3DIgMTjdJqGgtL8USSyxkfBGAjBCYTelKAryjpUVfELUeN9JTrbs2I4vU03EiLJTkgeynfylAzz26Q0iV2uO0013WxLloS"
+        PaymentConfiguration.init( applicationContext, keyStringPayment)
+
+        val intent = Intent(this, CheckoutActivity::class.java)
+        startActivity(intent)
     }
 
     private fun initAds(){
@@ -389,7 +398,7 @@ class MainActivity : AppCompatActivity() {
                 var height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height_cell, resources.displayMetrics).toInt()
                 var width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width_cell, resources.displayMetrics).toInt()
 
-                iv.setLayoutParams(TableRow.LayoutParams(width, height))
+                iv.layoutParams = TableRow.LayoutParams(width, height)
             }
         }
     }

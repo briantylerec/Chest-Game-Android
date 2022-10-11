@@ -40,7 +40,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.test:runner:1.4.0'
@@ -49,4 +49,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.google.android.gms:play-services-ads:21.3.0'
+
+    //version de stripe
+    implementation 'com.stripe:stripe-android:17.1.2'
+    //conex de stripe http
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'
+    //transformar formato json
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 }
