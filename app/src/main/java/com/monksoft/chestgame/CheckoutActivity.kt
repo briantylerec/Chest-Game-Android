@@ -1,5 +1,7 @@
 package com.monksoft.chestgame
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import android.os.Bundle
 import android.view.View
@@ -28,6 +30,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private lateinit var paymentIntentClientSecret: String
     private lateinit var paymentSheet: PaymentSheet
+    private var level : Int? = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,10 @@ class CheckoutActivity : AppCompatActivity() {
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        val bundle = intent.extras
+        level = bundle?.getInt("level")
+        if(level==null) level == 1
 
         // Hook up the pay button
         binding.payButton.setOnClickListener(::onPayClicked)
@@ -119,7 +126,8 @@ class CheckoutActivity : AppCompatActivity() {
     private fun onPaymentSheetResult(paymentResult: PaymentSheetResult) {
         when (paymentResult) {
             is PaymentSheetResult.Completed -> {
-                showToast("Payment complete!", Snackbar.LENGTH_SHORT)
+                //showToast("Payment complete!", Snackbar.LENGTH_SHORT)
+                becamePremium()
             }
             is PaymentSheetResult.Canceled -> {
                 //Log.i(TAG, "Payment canceled!")
@@ -130,5 +138,18 @@ class CheckoutActivity : AppCompatActivity() {
                 showToast("Payment failed!", Snackbar.LENGTH_SHORT)
             }
         }
+    }
+
+    private fun becamePremium() {
+        var sharedPreferences: SharedPreferences
+        sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE)
+        var editor = sharedPreferences.edit()
+        editor.apply{
+            putBoolean("PREMIUM", true)
+            putInt("LEVEL", level!!)
+        }.apply()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Chest Game</string>
+    <string name="app_name">Horse Game</string>
 
-    <string name="title">Chest Challenge</string>
+    <string name="title">Horse Challenge</string>
     <string name="level">Level</string>
     <string name="moves">Moves</string>
     <string name="time">Time</string>
